@@ -4,7 +4,10 @@ import org.springframework.stereotype.Component;
 /*import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;*/
 
-import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
+/*import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;*/
+
+
+import software.amazon.awssdk.auth.credentials.ContainerCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.comprehend.ComprehendClient;
 import software.amazon.awssdk.services.comprehend.model.DetectDominantLanguageRequest;
@@ -31,7 +34,7 @@ public class SendReceiveMessages {
     private SqsClient getClient() {
         return SqsClient.builder()
           .region(Region.US_EAST_2)
-          .credentialsProvider(InstanceProfileCredentialsProvider.create())
+          .credentialsProvider(ContainerCredentialsProvider.builder().build())
           .build();
     }
 
@@ -40,7 +43,7 @@ public class SendReceiveMessages {
 
         return ComprehendClient.builder()
           .region(Region.US_EAST_2)
-          .credentialsProvider(InstanceProfileCredentialsProvider.create())
+          .credentialsProvider(ContainerCredentialsProvider.builder().build())
           .build();
     }
 
